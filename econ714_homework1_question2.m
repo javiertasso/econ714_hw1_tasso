@@ -233,7 +233,7 @@ values_l = [integral_midpoint, integral_midpoint_t, integral_trapezoid, integral
     integral_simpson, integral_simpson_t, integral_montecarlo_crude, integral_montecarlo_crude_t, ...
     integral_montecarlo_importance, integral_montecarlo_importance_t]';
  
-values = round(values_l, 5);
+values = round(values_l, 4);
 
 row_names = {'Midpoint'; 'Time (in seconds)'; 'Trapezoid'; 'Time (in seconds)'; 'Simpson'; ...
     'Time (in seconds)'; 'Montecarlo Crude'; 'Time (in seconds)'; 'Montecarlo Importance'; ...
@@ -241,9 +241,14 @@ row_names = {'Midpoint'; 'Time (in seconds)'; 'Trapezoid'; 'Time (in seconds)'; 
   
 vv = [row_names, num2cell(values)];
 vvv = cell2table(vv, 'VariableNames', {'Method', 'N100', 'N1000', 'N10000', 'N100000'});
+ 
 
 % Export output 
 writetable(vvv,'econ714_homework1_question2_output.csv')
 
 % Clean 
 clearvars
+
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
