@@ -199,7 +199,7 @@ University of Pennsylvania \\ Fall 2021 \\ \\
     Although the algorithm is slow because it performs a lot of iterations, it can handle asymmetries and a higher number of agents and goods. Consider a total endowment of $100$ for each good, let's see how the social planner reallocates it under different parameter values for the case $m=n=3$. 
     
     \begin{itemize}
-        \item Let $\omega_j^i = \omega = -2$ for every agent and good. Include heterogeneity in the weights and the parameter $\alpha_j$. In particular, $\lambda = (1,2,3)$ and $\alpha = (3,2,1)$. Table (\ref{table_ex4_cons2}) shows the efficient allocation. These results make sense because the problem is fairly symmetric and the social planner values the utility of individual $3$ the most. The last column of the table has the equilibrium prices.  
+        \item Let $\omega_j^i = \omega = -2$ for every agent and good. Include heterogeneity in the weights and the parameter $\alpha_j$. In particular, $\lambda = (1,2,3)$ and $\alpha = (3,2,1)$. Table (\ref{table_ex4_cons2}) shows the efficient allocation. These results make sense because the problem is fairly symmetric and the social planner values the utility of individual $3$ the most. The last column of the table has the equilibrium prices. Note that the value of $\alpha$ only matters for the equilibrium prices, but it does not matter for the efficient allocation. The reason behind this is that $\alpha_j$ is the same for every individual. So if we repeat this exercise with $\alpha = (1,1,1)$ we get the same allocation and an equilibrium price vector of $p^* = (1,1,1)$. 
         
         \begin{table}[!htbp]
             \centering
@@ -268,12 +268,12 @@ University of Pennsylvania \\ Fall 2021 \\ \\
         
         \item Repeat for everyone and get the aggregate demand. 
         
-        \item If the aggregate demand of a good is greater than the aggregate endowment, randomly increase the price of that good. Similarly, if the aggregate demand of a good is smaller than its aggregate endowment, randomly decrease the price. 
+        \item If the aggregate demand of a good is greater than the aggregate endowment, randomly increase the price of that good. Similarly, if the aggregate demand of a good is smaller than its aggregate endowment, randomly decrease the price. Here we use the absolute value of a zero mean normal random variable. We let the standard deviation depend on the excess demand so that the price changes makes sense in every iteration (they get smaller as we approach the solution). Also we do not want the standard deviation to be too large because it may cause troubles with the matrix $J$, so we set the maximum standard deviation equal to $1$. 
         
         \item Start the process again and repeat until the aggregate demand and aggregate endowment are close to each other. 
     \end{itemize}
     
-    The algorithm is slow, but it seems to work at least when the heterogeneity is not too high. When the values of $\omega_i^j$ are very different from each other, the algorithm has troubles inverting the Jacobian. We tried to address this by forcing the method to take smaller steps so that the matrix does not change too much from iteration to iteration. In particular, the maximum step in a given direction cannot exceed $5\%$ of the maximum amount the agent could buy of that good, that is, $0.05 \cdot m/p_j$, where $m$ is the income. Table (\ref{table_ex5}) presents the equilibrium prices of seven possible scenarios. In all of them there are $3$ people and $3$ goods.
+    The algorithm is slow, but it seems to work at least when the heterogeneity is not too high. When the values of $\omega_i^j$ are very different from each other, the algorithm has troubles inverting the Jacobian. We tried to address this by forcing the method to take smaller steps so that the matrix does not change too much from iteration to iteration. In particular, the maximum step in a given direction cannot exceed $5\%$ of the maximum amount the agent could buy of that good, that is, $0.05 \cdot m/p_j$, where $m$ is the income. Similarly, we made sure that the draws for the new price vector do not have a large standard deviation. Table (\ref{table_ex5}) presents the equilibrium prices of seven possible scenarios. In all of them there are $3$ people and $3$ goods.
     
     
     \begin{enumerate}

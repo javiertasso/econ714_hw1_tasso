@@ -91,15 +91,15 @@ while excess_demand_norm > tol_norm && iterations < max_it
 
        if aggregate_demand(jj,1) - aggregate_endow(jj,1) > tol  
 
-           p(1,jj) = p(1,jj) + abs(normrnd(0,(aggregate_demand(jj,1) - aggregate_endow(jj,1))/...
-               (1 * aggregate_endow(jj,1))));
+           p(1,jj) = p(1,jj) + abs(normrnd(0,min((aggregate_demand(jj,1) - aggregate_endow(jj,1))/...
+               (1 * aggregate_endow(jj,1)),1)));
 
        end
 
        if aggregate_demand(jj,1) - aggregate_endow(jj,1) < -tol
 
-          p(1,jj) = max(p(1,jj) - abs(normrnd(0,(aggregate_endow(jj,1) - aggregate_demand(jj,1))/...
-               (1 * aggregate_endow(jj,1)))),10^(-6)); 
+          p(1,jj) = max(p(1,jj) - abs(normrnd(0,min((aggregate_endow(jj,1) - aggregate_demand(jj,1))/...
+               (1 * aggregate_endow(jj,1))),1)),10^(-6)); 
 
        end
 

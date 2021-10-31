@@ -16,7 +16,7 @@ for ii = 1:m
     
    for jj = 1:n
        
-       M(ii,jj) = alpha(jj) * X(ii,jj)^(1+omega(ii,jj))/(1+omega(ii,jj)); 
+       M(ii,jj) = alpha(ii) * X(ii,jj)^(1+omega(ii,jj))/(1+omega(ii,jj)); 
        
    end
    

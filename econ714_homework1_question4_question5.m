@@ -33,6 +33,8 @@ disp(iter_1)
 omega_1 = omega; 
 p_1 = eq_prices(endow, alpha, omega); 
 disp(p_1)
+
+ 
  
 % Try another set of parameters
 omega = -2 * ones(m,n);
@@ -42,6 +44,8 @@ disp(cons_2)
 disp(iter_2) 
 omega_2 = omega;  
 p_2 = eq_prices(endow, alpha, omega); 
+
+ 
  
 
 % Now we include some heterogeneity in the omegas 
