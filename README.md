@@ -14,7 +14,7 @@
 #
 # econ714_homework1_question3.m solves question 3
 # 
-# econ714_homework1_question4_question5.m solves question 4 and 5 
-#   -use function eq_prices.m to compute eq. price vector
-#   -use function sp_objective_function.m to compute the objective function of the social planner
-#   -use function spp_solution.m to solve the social planner problem
+# econ714_homework1_question4_question5.m solves question 4 and 5: 
+#   -it uses function eq_prices.m to compute eq. price vector
+#   -it uses function sp_objective_function.m to compute the objective function of the social planner
+#   -it uses function spp_solution.m to solve the social planner problem
