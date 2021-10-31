@@ -1,0 +1,5 @@
+Method,GuessI,GuessII,GuessIII,GuessIV
+Newton Raphson,5,4,6,5
+Time (in seconds),0.0052,0.0004,0.0002,0.0002
+BFGS,32,23,73,53
+Time (in seconds),0.0078,0.0017,0.0009,0.0012
