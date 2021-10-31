@@ -136,7 +136,7 @@ University of Pennsylvania \\ Fall 2021 \\ \\
         \csvautotabular{econ714_homework1_question3_output.csv}
     \end{table}
         
-        \item Steepest descent. Figure (\ref{steepest_des_fig}) plots the trajectories for different initial guesses and has the number of iterations and time elapsed included. The algorithm is pretty fast, but since the function is very flat near the minimum the trajectories are not optimal.  
+        \item Steepest descent. Figure (\ref{steepest_des_fig}) plots the trajectories for different initial guesses and has the number of iterations and time elapsed included. The algorithm is pretty fast, but since the function is very flat near the minimum the trajectories are not optimal. Circles are the initial guesses and the star is the solution.   
         
         
     \begin{figure}[!htbp]
@@ -152,7 +152,7 @@ University of Pennsylvania \\ Fall 2021 \\ \\
         
         
         
-        \item Conjugate descent. Figure (\ref{conj_descent}) shows the results. This one is slower but we see that the trajectories seem smoother. We implemented the non-linear version and as step size we used the inverse of the maximum eigenvalue of the Hessian matrix at the initial guess. 
+        \item Conjugate descent. Figure (\ref{conj_descent}) shows the results. This one is slower but we see that the trajectories seem smoother. We implemented the non-linear version and as step size we used the inverse of the maximum eigenvalue of the Hessian matrix at the initial guess. As before, circles are the initial guesses and the star is the solution.   
         
         
        \begin{figure}[!htbp]
@@ -162,7 +162,7 @@ University of Pennsylvania \\ Fall 2021 \\ \\
        
        \subfloat{\includegraphics[scale=0.5]{econ714_homework1_question3_plot_cong_3.png}}
        \subfloat{\includegraphics[scale=0.5]{econ714_homework1_question3_plot_cong_4.png}}
-        \caption{Steepest Descent Method} 
+        \caption{Conjugate Descent Method} 
         \label{conj_descent}
     \end{figure}
         
@@ -262,7 +262,7 @@ University of Pennsylvania \\ Fall 2021 \\ \\
     \begin{itemize}
         \item Guess a price vector. Start with one person and calculate her income using the guess. The initial guess for $x^i=(x^i_1,\dots, x^i_m)$ is the income divided by $m\cdot p_j$. This would be the solution if the utility function was Cobb Douglas. 
         \item Now calculate the first order condition at this value of $x^i$. This a vector valued function $F(\cdot)$ (with $m$ dimensions) where the first equation is the budget constraint and we have eliminated the Lagrange multiplier. Calculate the norm of $F(\cdot)$: as long as the norm is higher than our tolerance level, we continue iterating. 
-        \item Calculate the Jacobian matrix $J$ of the system and define a possible step as $-J^{-1}\cdot F(\cdot)$. Change the step if it is too high: we don't want to move too fast. 
+        \item Calculate the Jacobian matrix $J$ of the system and define a possible step as $-J^{-1}\cdot F(\cdot)$. Change the step if it is too high: we don't want to move too fast. See equation (\ref{systemF}) for more details about the system. 
         
         \item Update the point $x^i$ and start again. After iterating we get the individual demand of person $i$. 
         
@@ -277,14 +277,14 @@ University of Pennsylvania \\ Fall 2021 \\ \\
     
     
     \begin{enumerate}
-        \item First $\alpha = (3,2,1)$, there are $100$ units of each good. Person $i$ owns all the endowment of good $j=i$. Here we see that good $1$ is relatively more expensive because it is more desirable. Here we have $\omega_j^i=-2$ for all $i$ and $j$. 
+        \item First $\alpha = (3,2,1)$, there are $100$ units of each good. Person $i$ owns all the endowment of good $j=i$. Here we see that good $1$ is relatively more expensive because it is more desirable. We use $\omega_j^i=-2$ for all $i$ and $j$. 
         \item Redistributing the initial endowment from the first scenario does not change the equilibrium price vector. Here everything is the same as before but now the initial endowment is $100/3$ for each good and each person. 
         \item Now there are $90$ units of good $1$, $100$ units of good $2$ and $120$ units of good $3$ owned by agents $1$, $2$ and $3$ respectively. 
         \item Same as the previous one but the initial endowment is shared equally between everyone. we see that the equilibrium prices do not change.  
         \item Now we go back to scenario $1$ but we vary $\omega$. Person $i$ has the same $\omega_j^1 = -2$ for every good, person $2$ has $\omega_j^2 = -2.05$ for every good and person $3$ has $\omega_j^3 = -2.1$ for every good. We see that the equilibrium prices do not change when comparing to the first scenario. This makes sense because the preferences are homothetic. 
         \item Now good $1$ has $\omega_1^i=-2$ for every individual, good $2$ has $\omega_2^i=-2.05$ for everyone and good $3$ has $\omega_3^i=-2.1$ for everyone. Now we see differences in the equilibrium prices. 
         
-        \item Same as scenario $1$ but now we use $\alpha = (1,2,3)$. 
+        \item Same as scenario $1$ but now we use $\alpha = (1,2,3)$. Note that $p^* = \alpha$. 
     \end{enumerate}
     
     
@@ -293,6 +293,21 @@ University of Pennsylvania \\ Fall 2021 \\ \\
             \caption[Short Caption for LoT]{Equilibrium prices of $6$ possible scenarios}\label{table_ex5}
             \csvautotabular{econ714_homework1_question5_output.csv}
         \end{table}
+        
+        
+    For each individual $i=1,\dots, n$ we solve the following system. We omit the superscripts that refer to the agent. $F(x)$ is $m\times 1$. We eliminate the Lagrange multiplier by using the first order condition of the agent. 
+
+    \begin{align}\label{systemF}
+    \begin{cases}
+        F_1(x) & = p_1x_1 + \dots + p_mx_m - p_1e_1 -\dots - p_me_m = 0 \\  F_j(x) & = \frac{\alpha_j}{\alpha_1} \cdot \frac{x_j^{\omega_j}}{x_1^{\omega_1}} - \frac{p_j}{p_1} = 0 \quad\text{for}\quad j = 2,\dots,m
+    \end{cases}
+    \end{align}
+    
+    The Jacobian of the system looks like this. we express it in terms of $F(x)$ to help with the computation. 
+    
+    \begin{align*}
+        J & = \begin{pmatrix} p_1 & p_2 & \dots & p_m \\ -\frac{\omega_1}{x_1}  F_2(x) & \frac{\omega_2}{x_2} F_2(x) & \dots & 0 \\ \dots & \dots & \dots &\dots \\ -\frac{\omega_1}{x_1} F_m(x) & 0 & \dots & \frac{\omega_m}{x_m} F_m(x) \end{pmatrix}
+    \end{align*}
     
     
     
