@@ -7,6 +7,10 @@
 # Javier Tasso 
 # ----------------------------------------------------------
 #
+# IMPORTANT: LAST UPDATE OCT/31 at 15:00, I corrected two mistakes in questions 4 and 5
+#
+# ----------------------------------------------------------
+# 
 # The codes should produce all the output needed to create the pdf 
 # I used MATLAB R2018a, I'm sorry if this causes trouble with some command (specially with the ones that export the figures and output) 
 #
@@ -18,3 +22,6 @@
 #   -it uses function eq_prices.m to compute eq. price vector
 #   -it uses function sp_objective_function.m to compute the objective function of the social planner
 #   -it uses function spp_solution.m to solve the social planner problem
+#
+# ----------------------------------------------------------
+
